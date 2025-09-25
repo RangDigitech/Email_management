@@ -1,0 +1,95 @@
+/* CampaignDetailModal.css */
+.detail-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+  }
+  
+  .detail-content {
+    width: min(900px, 95%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    max-height: 90vh;
+    overflow: auto;
+  }
+  
+  .detail-close {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    border: none;
+    background: transparent;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+  
+  .detail-title {
+    margin: 0 0 8px 0;
+  }
+  
+  .detail-sub {
+    margin: 6px 0;
+    color: #444;
+  }
+  
+  .emails-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  
+  .emails-column {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .emails-column h4 {
+    margin: 0 0 8px 0;
+    font-size: 0.95rem;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .emails-column ul {
+    margin: 0;
+    padding-left: 18px;
+    color: #333;
+  }
+  
+  .muted {
+    color: #777;
+  }
+  
+  .detail-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
+  
+  .btn-delete {
+    background: #fff6f6;
+    color: #d33;
+    border: 1px solid rgba(211, 50, 50, 0.12);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  .btn-close {
+    background: #eef2ff;
+    color: #0b66ff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  

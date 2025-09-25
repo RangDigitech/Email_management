@@ -1,0 +1,117 @@
+/* CampaignsPage.css */
+.campaigns-page {
+    padding: 16px;
+  }
+  
+  .campaigns-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .btn-edit {
+    background-color: #78c4f0; /* yellow */
+    color: #000;
+    padding: 6px 10px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  
+  
+  .campaigns-top h3 {
+    margin: 0;
+    font-size: 1.25rem;
+  }
+  
+  .campaigns-count {
+    color: #666;
+    font-size: 0.95rem;
+  }
+  
+  .empty-state {
+    background: #fff;
+    border-radius: 8px;
+    padding: 28px;
+    text-align: center;
+    color: #555;
+  }
+  
+  .campaigns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  
+  .campaign-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  }
+  
+  .card-left {
+    flex: 1;
+  }
+  
+  .campaign-name {
+    margin: 0 0 6px 0;
+    font-size: 1rem;
+  }
+  
+  .campaign-topic {
+    margin: 0 0 8px 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .campaign-meta {
+    display: flex;
+    gap: 10px;
+    color: #777;
+    font-size: 0.85rem;
+  }
+  
+  .meta-item {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .btn-view,
+  .btn-delete {
+    border: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .btn-view {
+    background: #eef6ff;
+    color: #0b66ff;
+  }
+  
+  .btn-delete {
+    background: #fff6f6;
+    color: #d33;
+    border: 1px solid rgba(211, 50, 50, 0.12);
+  }
+  
