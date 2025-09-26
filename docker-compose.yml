@@ -1,5 +1,4 @@
 version: "3.9"
-
 services:
   backend:
     build: ./backend
@@ -10,7 +9,6 @@ services:
       - ./backend/.env
     depends_on:
       - db
-
   frontend:
     build: ./frontend
     container_name: react-frontend
@@ -18,7 +16,6 @@ services:
       - "3000:80"
     depends_on:
       - backend
-
   db:
     image: mysql:8.0
     container_name: mysql-db
@@ -32,6 +29,5 @@ services:
       - db_data:/var/lib/mysql
     ports:
       - "3306:3306"
-
 volumes:
   db_data:
