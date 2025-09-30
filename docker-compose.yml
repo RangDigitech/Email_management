@@ -1,35 +1,52 @@
+# Specifies the Docker Compose file format version. Version 3.8 is modern and recommended.
 version: '3.8'
 
+# Defines the different services (containers) that make up your application.
 services:
+
+  # 1. The Python Backend Service
   backend:
-    build: ./backend  # Path to your backend folder with the Dockerfile
+    # Tells Docker Compose to build the image from the Dockerfile located in the './backend' directory.
+    build: ./backend
+    # Ensures the container will restart automatically if it crashes or the server reboots.
     restart: always
     ports:
-      - "8003:5000"  # Map VPS port 8003 to container port 5000
-    environment:
-      - DB_HOST=db
-      - DB_USER=your_db_user
-      - DB_PASSWORD=your_strong_password
-      - DB_NAME=your_db_name
+      # Maps port 8003 on your VPS to port 5000 inside the container, where Gunicorn is running.
+      - "8003:5000"
+    env_file:
+      # Loads environment variables from the .env file located in the same directory.
+      # This is how your Python app gets its database credentials.
+      - ./.env
+    # Specifies that the backend service depends on the 'db' service.
+    # Docker Compose will start the 'db' container before starting the 'backend' container.
     depends_on:
       - db
 
+  # 2. The React Frontend Service
   frontend:
-    build: ./frontend # Path to your frontend folder with the Dockerfile
+    # Builds the image from the Dockerfile located in the './frontend' directory.
+    build: ./frontend
     restart: always
     ports:
-      - "8004:80"    # Map VPS port 8004 to container port 80
+      # Maps port 8004 on your VPS to port 80 inside the container, where Nginx is serving files.
+      - "8004:80"
 
+  # 3. The MySQL Database Service
   db:
+    # Uses the official MySQL 8.0 image from Docker Hub.
     image: mysql:8.0
     restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: your_root_password
-      MYSQL_DATABASE: your_db_name
-      MYSQL_USER: your_db_user
-      MYSQL_PASSWORD: your_strong_password
+    env_file:
+      # Loads environment variables from the .env file.
+      # The MySQL image uses these variables (e.g., MYSQL_ROOT_PASSWORD) for its initial setup.
+      - ./.env
     volumes:
+      # Mounts a named volume 'mysql-data' to the directory where MySQL stores its data.
+      # This ensures your database data persists even if the container is removed or recreated.
       - mysql-data:/var/lib/mysql
 
+# Defines the named volumes used by your services.
 volumes:
   mysql-data:
+    # An empty driver configuration uses the default local driver, which is what you want here.
+
