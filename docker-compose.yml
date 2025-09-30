@@ -2,28 +2,34 @@ version: '3.8'
 
 services:
   backend:
-    build: ./backend
-    container_name: email_system_backend
+    build: ./backend  # Path to your backend folder with the Dockerfile
     restart: always
-    env_file:
-      - ./backend/.env  # Loads your environment variables from the .env file
-    command: gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8001
     ports:
-      - "8001:8001" # Exposes the container's port 8001 to the host's port 8001
-    networks:
-      - app-network
+      - "8003:5000"  # Map VPS port 8003 to container port 5000
+    environment:
+      - DB_HOST=db
+      - DB_USER=your_db_user
+      - DB_PASSWORD=your_strong_password
+      - DB_NAME=your_db_name
+    depends_on:
+      - db
 
   frontend:
-    build: ./frontend
-    container_name: email_system_frontend
+    build: ./frontend # Path to your frontend folder with the Dockerfile
     restart: always
     ports:
-      - "8000:80" # Exposes the container's Nginx port 80 to the host's port 8000
-    depends_on:
-      - backend
-    networks:
-      - app-network
+      - "8004:80"    # Map VPS port 8004 to container port 80
 
-networks:
-  app-network:
-    driver: bridge
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: your_root_password
+      MYSQL_DATABASE: your_db_name
+      MYSQL_USER: your_db_user
+      MYSQL_PASSWORD: your_strong_password
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
