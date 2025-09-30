@@ -31,8 +31,8 @@ export default function Dashboard({ username, onLogout }) {
     const [campaignBeingEdited, setCampaignBeingEdited] = useState(null);
     const [isListsOpen, setIsListsOpen] = useState(false);
 
-    const API_BASE = 'http://127.0.0.1:5000';
-    const FASTAPI_URL = 'http://127.0.0.1:8000/'; 
+    const API_BASE = '';
+    const FASTAPI_URL = 'http://17.0.0.1:8000/'; 
     // replace with your actual FastAPI endpoint
 
     // Load campaigns from backend

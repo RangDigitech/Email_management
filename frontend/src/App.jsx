@@ -16,7 +16,9 @@ export default function App() {
         const formData = new FormData(form);
         const data = Object.fromEntries(formData.entries());
         const endpoint = isLoginView ? '/api/login' : '/api/signup';
-        const url = `http://127.0.0.1:5000${endpoint}`;
+        
+        // --- THIS IS THE CORRECTED LINE ---
+        const url = endpoint; // No more http://127.0.0.1:5000
 
         try {
             setMessage({ text: 'Processing...', type: 'info' });
@@ -55,6 +57,7 @@ export default function App() {
         return <Dashboard username={username} onLogout={handleLogout} />;
     }
     
+    // ... rest of the component remains the same
     return (
         <div className="auth-container">
             <div className="form-card">
@@ -105,5 +108,3 @@ export default function App() {
         </div>
     );
 }
-
-
