@@ -527,6 +527,5 @@ def delete_single_list():
         cursor.close()
         conn.close()
 
-if __name__ == '__main__':
-    ensure_tables_exist()
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)
