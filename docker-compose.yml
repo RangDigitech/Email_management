@@ -1,34 +1,29 @@
-version: "3.9"
+version: '3.8'
 
 services:
   backend:
     build: ./backend
-    container_name: flask-backend
-    ports:
-      - "5000:5000"
+    container_name: email_system_backend
+    restart: always
     env_file:
-      - ./backend/.env
-    depends_on:
-      - db
+      - ./backend/.env  # Loads your environment variables from the .env file
+    command: gunicorn -w 4 -k uvicorn.workers.UvicornWorker main:app --bind 0.0.0.0:8001
+    ports:
+      - "8001:8001" # Exposes the container's port 8001 to the host's port 8001
+    networks:
+      - app-network
+
   frontend:
     build: ./frontend
-    container_name: react-frontend
+    container_name: email_system_frontend
+    restart: always
     ports:
-      - "3000:80"
+      - "8000:80" # Exposes the container's Nginx port 80 to the host's port 8000
     depends_on:
       - backend
-  db:
-    image: mysql:8.0
-    container_name: mysql-db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: user_auth_db
-      MYSQL_USER: appuser
-      MYSQL_PASSWORD: apppassword
-    volumes:
-      - db_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
-volumes:
-  db_data:
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
